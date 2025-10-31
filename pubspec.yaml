@@ -1,0 +1,40 @@
+name: visitas_tecnicas
+description: "Aplicación para registrar visitas técnicas con QR y geolocalización"
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: ">=3.9.2 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.8
+  provider: ^6.1.5
+  sqflite: ^2.4.2
+  path: ^1.9.1
+  permission_handler: ^12.0.1
+  geolocator: ^14.0.2
+  intl: ^0.20.2
+  mobile_scanner: ^3.5.7
+  url_launcher: ^6.1.11
+  flutter_error_boundary: ^0.0.2
+  fluttertoast: ^8.2.5
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+  mockito: ^5.4.0
+  sqflite_common_ffi: ^2.2.1
+  integration_test:
+    sdk: flutter
+
+
+flutter:
+  uses-material-design: true
+
+flutter_icons:
+  android: true
+  ios: true
+  image_path: "assets/icon/app.png"
