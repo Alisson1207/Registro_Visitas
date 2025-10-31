@@ -3,7 +3,6 @@ import 'package:provider/provider.dart';
 import '../providers/visits_provider.dart';
 import '../widgets/visit_card.dart';
 import '../theme/app_theme.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 
 class VisitsListScreen extends StatefulWidget {
   final String role;
@@ -25,37 +24,13 @@ class _VisitsListScreenState extends State<VisitsListScreen> {
   @override
   Widget build(BuildContext context) {
     final visitsProvider = context.watch<VisitsProvider>();
-    List visits = [];
-
-    try {
-      visits = visitsProvider.visitsByRole(widget.role, widget.technician);
-    } catch (e) {
-      Fluttertoast.showToast(
-        msg: 'Error al obtener registros: $e',
-        toastLength: Toast.LENGTH_LONG,
-        gravity: ToastGravity.BOTTOM,
-        backgroundColor: Colors.redAccent,
-        textColor: Colors.white,
-      );
-    }
-
+    final visits = visitsProvider.visitsByRole(widget.role, widget.technician);
     final isSupervisor = widget.role == 'supervisor';
 
-    List filtered = [];
-    try {
-      filtered = visits.where((v) {
-        final query = _searchQuery.toLowerCase();
-        return v.code.toLowerCase().contains(query);
-      }).toList();
-    } catch (e) {
-      Fluttertoast.showToast(
-        msg: 'Error al filtrar registros: $e',
-        toastLength: Toast.LENGTH_LONG,
-        gravity: ToastGravity.BOTTOM,
-        backgroundColor: Colors.redAccent,
-        textColor: Colors.white,
-      );
-    }
+    final filtered = visits.where((v) {
+      final query = _searchQuery.toLowerCase();
+      return v.code.toLowerCase().contains(query);
+    }).toList();
 
     final theme = Theme.of(context);
 
@@ -63,7 +38,7 @@ class _VisitsListScreenState extends State<VisitsListScreen> {
       backgroundColor: theme.scaffoldBackgroundColor,
       appBar: AppBar(
         title: const Text('Visitas'),
-        backgroundColor: AppTheme.primaryColor,
+        backgroundColor: AppTheme.primaryColor, // color fijo
         centerTitle: true,
       ),
       body: Column(
